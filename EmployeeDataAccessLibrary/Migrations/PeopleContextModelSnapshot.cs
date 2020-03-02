@@ -25,24 +25,15 @@ namespace EmployeeDataAccessLibrary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<string>("City");
 
                     b.Property<int?>("PersonId");
 
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("State");
 
-                    b.Property<string>("StreetAddress")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<string>("StreetAddress");
 
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasColumnType("varchar(10)")
-                        .HasMaxLength(10);
+                    b.Property<string>("ZipCode");
 
                     b.HasKey("Id");
 
@@ -57,9 +48,7 @@ namespace EmployeeDataAccessLibrary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("EmailAddress")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<string>("EmailAddress");
 
                     b.Property<int?>("PersonId");
 
@@ -78,13 +67,9 @@ namespace EmployeeDataAccessLibrary.Migrations
 
                     b.Property<int>("Age");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("LastName");
 
                     b.HasKey("Id");
 

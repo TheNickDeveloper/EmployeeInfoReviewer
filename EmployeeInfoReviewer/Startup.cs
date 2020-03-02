@@ -30,12 +30,15 @@ namespace EmployeeInfoReviewer
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //MS_SQL use
             services.AddDbContext<PeopleContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
 
-            //services.AddSingleton<IStudentServices, StudentServices>();
+            //MongoDb use
+            services.AddSingleton<IConfiguration>(Configuration);
 
         }
 
@@ -55,7 +58,6 @@ namespace EmployeeInfoReviewer
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
             app.UseMvc();
         }
     }

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using EmployeeDataAccessLibrary.DataAccess;
 using EmployeeDataAccessLibrary.Models;
 using EmployeeInfoReviewer.Services;
 using EmployeeInfoReviewer.Interfaces;
+using Microsoft.Extensions.Configuration;
+using EmployeeDataAccessLibrary.DataAccess;
 
 namespace EmployeeInfoReviewer.Controllers
 {
@@ -13,9 +14,15 @@ namespace EmployeeInfoReviewer.Controllers
     {
         private readonly IPeopleService _peopleService;
 
-        public PeopleController(PeopleContext context)
+        //MsSql
+        public PeopleController(PeopleContext context, IConfiguration iconfig)
         {
+            // MsSql
             _peopleService = new PeopleService(context);
+            
+            //// MongoDB
+            //_peopleService = new MgPeopleService(iconfig);
+
         }
 
         // GET: api/People
@@ -101,7 +108,7 @@ namespace EmployeeInfoReviewer.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return Ok();
         }
 
     }

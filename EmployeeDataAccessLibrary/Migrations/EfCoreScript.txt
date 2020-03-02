@@ -1,0 +1,7 @@
+﻿// Ef core update script
+
+*Add migration
+Add-Migration UpdateTest
+
+*Update database
+Update-Database

@@ -1,0 +1,66 @@
+﻿*PostMan
+
+// Get
+https://localhost:44332/api/people
+
+// Get_id
+https://localhost:44332/api/people/{id}
+
+//Delete_id
+https://localhost:44332/api/people/{id}
+
+//Post
+https://localhost:44332/api/people
+
+////Jason
+{
+	"FirstName":"NEW",
+	"LastName":"GY",
+	"Age":10,
+	"Addresses":[{
+		"StreetAddress":"King QUEEN Street",
+		"City":"Southampton",
+		"State":"Hamampton",
+		"ZipCode":"001001"},
+		{
+		"StreetAddress":"Queen Street",
+		"City":"Taipei",
+		"State":"Taiwan",
+		"ZipCode":"001001"}
+	],
+	"EmailAddresses":[{
+		"EmailAddress":"Jack@king.com"},
+		{
+		"EmailAddress":"Jack123@king.com"}
+	]
+}
+
+// Put
+https://localhost:44332/api/people/{id}
+
+////Jason
+{
+	"FirstName":"NEW",
+	"LastName":"GY",
+	"Age":10,
+	"Addresses":[{
+		"Id": 1 (needed only when using MS_SQL)
+		"StreetAddress":"King QUEEN Street",
+		"City":"Southampton",
+		"State":"Hamampton",
+		"ZipCode":"001001"},
+		{
+		"Id": 2 (needed only when using MS_SQL)
+		"StreetAddress":"Queen Street",
+		"City":"Taipei",
+		"State":"Taiwan",
+		"ZipCode":"001001"}
+	],
+	"EmailAddresses":[{
+		"Id": 1 (needed only when using MS_SQL)
+		"EmailAddress":"Jack@king.com"},
+		{
+		"Id": 2 (needed only when using MS_SQL)
+		"EmailAddress":"Jack123@king.com"}
+	]
+}
