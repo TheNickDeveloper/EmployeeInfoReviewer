@@ -33,7 +33,7 @@ ASP.NET Core Web API project by using SQL Server and MongoDB. Basic CRUD practic
 
 * When using MS_SQL, using the contracture below. In addition, need to specify the child object ID while doing put function.
 
-```
+```csharp
     public PeopleController(PeopleContext context, IConfiguration iconfig)
     {
         _peopleService = new PeopleService(context);
@@ -42,7 +42,7 @@ ASP.NET Core Web API project by using SQL Server and MongoDB. Basic CRUD practic
 
 * When using MongoDB, using the contracture below. Child object ID will auto generate while doing put function.
 
-```
+```csharp
     public PeopleController(PeopleContext context, IConfiguration iconfig)
     {
         _peopleService = new MgPeopleService(iconfig);
