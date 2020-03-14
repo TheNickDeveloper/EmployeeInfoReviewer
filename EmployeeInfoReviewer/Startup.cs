@@ -28,6 +28,8 @@ namespace EmployeeInfoReviewer
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            var clientDomain = Configuration.GetValue<string>("ClientDomain");
+            services.AddCors(cfg => cfg.AddPolicy("ClientDomain", builder => builder.WithOrigins(clientDomain)));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -55,6 +57,7 @@ namespace EmployeeInfoReviewer
                 app.UseHsts();
             }
 
+            app.UseCors("ClientDomain");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

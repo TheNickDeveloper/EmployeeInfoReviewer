@@ -1,0 +1,42 @@
+<table>
+    <tr>
+        <th>Id</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Age</th>
+    </tr>
+    <tr *ngFor="let peo of people">
+        <td>{{peo.id}}</td>
+        <td>{{peo.firstName}}</td>
+        <td>{{peo.lastName}}</td>
+        <td>{{peo.age}}</td>
+    </tr>
+</table>
+
+<br/>
+
+<table>
+    <tr>
+        <th>EmailAddress</th>
+    </tr>
+    <tr *ngFor="let emailAddress of emailAddresses">
+        <td>{{emailAddress.emailAddress}}</td>
+    </tr>
+</table>
+
+<br/>
+
+<table>
+    <tr>
+        <th>StreetAddress</th>
+        <th>City</th>
+        <th>State</th>
+        <th>ZipCode</th>
+    </tr>
+    <tr *ngFor="let address of addresses">
+        <td>{{address.streetAddress}}</td>
+        <td>{{address.city}}</td>
+        <td>{{address.state}}</td>
+        <td>{{address.zipCode}}</td>
+    </tr>
+</table>

@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <th>Id</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Age</th>
+        <th>Details</th>
+    </tr>
+    <tr *ngFor="let peo of people">
+        <td>{{peo.id}}</td>
+        <td>{{peo.firstName}}</td>
+        <td>{{peo.lastName}}</td>
+        <td>{{peo.age}}</td>
+        <td><a href="/people/{{peo.id}}">Link...</a></td>
+    </tr>
+</table>
