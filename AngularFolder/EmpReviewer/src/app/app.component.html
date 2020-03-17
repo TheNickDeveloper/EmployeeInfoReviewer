@@ -1,4 +1,11 @@
-<h1>{{title}}</h1>
+<mat-toolbar color="primary" class="navbar">
+    <div>{{title}}</div>
+    <nav>
+        <span><a href="#" [routerLink]="['/']">Home</a></span>
+        <span><a href="#" [routerLink]="['/people']">PeopleInfo</a></span>
+        <span><a href="#" [routerLink]="['/addPerson']">AddPerson</a></span>
+    </nav>
+</mat-toolbar>
 
 <router-outlet></router-outlet>
 

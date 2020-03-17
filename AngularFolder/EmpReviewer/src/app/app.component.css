@@ -1,0 +1,14 @@
+.navbar{
+    justify-content: space-between;
+}
+
+a{
+    color: white;
+    padding-right: 1rem;
+    text-decoration: none;
+    font-size: small;
+}
+
+a:hover{
+    text-decoration:underline;
+}

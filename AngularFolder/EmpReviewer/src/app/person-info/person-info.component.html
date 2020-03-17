@@ -1,42 +1,56 @@
-<table>
-    <tr>
-        <th>Id</th>
-        <th>FirstName</th>
-        <th>LastName</th>
-        <th>Age</th>
-    </tr>
-    <tr *ngFor="let peo of people">
-        <td>{{peo.id}}</td>
-        <td>{{peo.firstName}}</td>
-        <td>{{peo.lastName}}</td>
-        <td>{{peo.age}}</td>
-    </tr>
-</table>
+<mat-table [dataSource]="people">
+    <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+        <mat-cell *matCellDef="let person"> {{person.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef> FirstName </mat-header-cell>
+        <mat-cell *matCellDef="let person"> {{person.firstName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef> LastName </mat-header-cell>
+        <mat-cell *matCellDef="let person"> {{person.lastName}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="age">
+        <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
+        <mat-cell *matCellDef="let person"> {{person.age}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="peopleInfoColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: peopleInfoColumns;"></mat-row>
+</mat-table>
 
 <br/>
-
-<table>
-    <tr>
-        <th>EmailAddress</th>
-    </tr>
-    <tr *ngFor="let emailAddress of emailAddresses">
-        <td>{{emailAddress.emailAddress}}</td>
-    </tr>
-</table>
+<h4>Address Table</h4>
+<mat-table [dataSource]="addresses">
+    <ng-container matColumnDef="streetAddress">
+        <mat-header-cell *matHeaderCellDef> StreetAddress </mat-header-cell>
+        <mat-cell *matCellDef="let address"> {{address.streetAddress}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+        <mat-cell *matCellDef="let address"> {{address.city}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="state">
+        <mat-header-cell *matHeaderCellDef> State </mat-header-cell>
+        <mat-cell *matCellDef="let address"> {{address.state}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="zipCode">
+        <mat-header-cell *matHeaderCellDef> ZipCode </mat-header-cell>
+        <mat-cell *matCellDef="let address"> {{address.zipCode}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="addressColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: addressColumns;"></mat-row>
+</mat-table>
 
 <br/>
+<h4>Email Addresses Table</h4>
 
-<table>
-    <tr>
-        <th>StreetAddress</th>
-        <th>City</th>
-        <th>State</th>
-        <th>ZipCode</th>
-    </tr>
-    <tr *ngFor="let address of addresses">
-        <td>{{address.streetAddress}}</td>
-        <td>{{address.city}}</td>
-        <td>{{address.state}}</td>
-        <td>{{address.zipCode}}</td>
-    </tr>
-</table>
+<mat-table [dataSource]="emailAddresses">
+    <ng-container matColumnDef="emailAddress">
+        <mat-header-cell *matHeaderCellDef> EmailAddress </mat-header-cell>
+        <mat-cell *matCellDef="let email"> {{email.emailAddress}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="emailAddressColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: emailAddressColumns;"></mat-row>
+</mat-table>
+

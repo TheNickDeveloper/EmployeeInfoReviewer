@@ -11,6 +11,7 @@ import { Person } from '../models/person';
 export class PeopleInfoComponent implements OnInit {
 
   people : Person[];
+  displayedColumns: any;
 
   constructor(private _service: PeopleService) { }
 
@@ -19,5 +20,6 @@ export class PeopleInfoComponent implements OnInit {
       console.log(data);
       this.people = data;
     });
+    this.displayedColumns = ['id','firstName','lastName','age','detail'];
   }
 }

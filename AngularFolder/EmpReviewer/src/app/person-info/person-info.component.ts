@@ -11,9 +11,13 @@ import { PeopleService } from '../services/people.service';
 export class PersonInfoComponent implements OnInit {
 
   people : Person[];
-  emailAddresses : EmailAddress[] = [];
-  addresses : Address[] = [];
+  emailAddresses : EmailAddress[];
+  addresses : Address[];
   id: any;
+
+  peopleInfoColumns: any;
+  addressColumns: any;
+  emailAddressColumns: any;
 
   constructor(
     private _service: PeopleService,
@@ -23,21 +27,16 @@ export class PersonInfoComponent implements OnInit {
     this.id = parseInt(this._route.snapshot.paramMap.get('id'));
 
     this._service.getPeopleInfoById(this.id).subscribe((data)=>{
-      console.log(data);
       this.people = data;
 
       this.people.forEach(person => {
-        let emails = person.emailAddresses;
-        emails.forEach(email =>{
-          this.emailAddresses.push(email);
-        })
-
-        let addresses = person.addresses;
-        addresses.forEach(address =>{
-          this.addresses.push(address);
-        })
+        this.addresses = person.addresses;
+        this.emailAddresses = person.emailAddresses;
       });
     });
-  }
 
+    this.peopleInfoColumns = ['id','firstName','lastName','age'];
+    this.addressColumns = ['streetAddress','city','state','zipCode'];
+    this.emailAddressColumns = ['emailAddress'];
+  }
 }
