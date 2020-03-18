@@ -18,6 +18,9 @@ namespace EmployeeInfoReviewer
 
         public IConfiguration Configuration { get; }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -29,7 +32,21 @@ namespace EmployeeInfoReviewer
             });
 
             var clientDomain = Configuration.GetValue<string>("ClientDomain");
-            services.AddCors(cfg => cfg.AddPolicy("ClientDomain", builder => builder.WithOrigins(clientDomain)));
+            //services.AddCors(cfg => cfg.AddPolicy("ClientDomain", builder => builder.WithOrigins(clientDomain)));
+
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins(clientDomain)
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
+
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -57,7 +74,7 @@ namespace EmployeeInfoReviewer
                 app.UseHsts();
             }
 
-            app.UseCors("ClientDomain");
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

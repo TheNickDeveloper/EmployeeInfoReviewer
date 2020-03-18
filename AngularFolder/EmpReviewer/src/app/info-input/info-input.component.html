@@ -17,7 +17,7 @@
         </mat-form-field>
     
         <mat-form-field>
-            <input matInput placeholder="Age" formControlName="age">
+            <input type="number" matInput placeholder="Age" formControlName="age">
         </mat-form-field>
     
         <h4>Addresses</h4>
@@ -47,9 +47,9 @@
     
         <h4>Email Addresses</h4>
         <div formArrayName="emailAddresses">
-            <div *ngFor="let email of emailForms.controls; let i=index" [formGroupName]="i">
+            <div *ngFor="let emailress of emailForms.controls; let i=index" [formGroupName]="i">
                 <mat-form-field>
-                    <input matInput placeholder="Email Address" formControlName="email">
+                    <input matInput placeholder="Email Address" formControlName="emailAddress">
                     <mat-error >
                         Please fill in the correct format
                     </mat-error>
@@ -63,7 +63,7 @@
         <p></p>
     
         <div>
-            <button mat-raised-button [disabled]="myForm.invalid">Summit</button>
+            <button mat-raised-button [disabled]="myForm.invalid" (click)="postDataToDb()">Summit</button>
         </div>
     </form>
 

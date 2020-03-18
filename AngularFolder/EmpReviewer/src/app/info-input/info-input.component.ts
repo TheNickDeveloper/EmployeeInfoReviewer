@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { PeopleService } from '../services/people.service';
+
 
 @Component({
   selector: 'app-info-input',
@@ -10,7 +12,9 @@ export class InfoInputComponent implements OnInit {
 
   myForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private _service: PeopleService) { }
 
   ngOnInit(): void {
 
@@ -48,12 +52,21 @@ export class InfoInputComponent implements OnInit {
   }
   addEmailAddress(){
     const emailAddress = this.fb.group({
-      email: ['',Validators.email]
+      emailAddress: ['',Validators.email]
     });
     this.emailForms.push(emailAddress);
   }
 
   deleteEmailAddress(email : any){
     this.emailForms.removeAt(email);
+  }
+
+  postDataToDb(){
+    let formData = this.myForm.getRawValue();
+    let serializedFormData = JSON.stringify(formData);
+    this._service.postPersonInfo(serializedFormData).subscribe(data => {
+      console.log(data);
+    });
+    ;
   }
 }
