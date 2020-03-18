@@ -1,5 +1,5 @@
 # EmployeeInfoReviewer
-ASP.NET Core Web API project by using SQL Server and MongoDB. Basic CRUD practice by using instace of employee information. Can do further interaction with this API by using enclosed Angular 8 project. 
+ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that use employee information as CURD practice. 
  
 ## Farmework Apply
 1. Asp.net Core web API.
