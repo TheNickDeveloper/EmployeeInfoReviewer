@@ -1,4 +1,4 @@
-<mat-table [dataSource]="people">
+<mat-table [dataSource]="newPeople">
     <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
         <mat-cell *matCellDef="let person"> {{person.id}} </mat-cell>
@@ -44,7 +44,6 @@
 
 <br/>
 <h4>Email Addresses Table</h4>
-
 <mat-table [dataSource]="emailAddresses">
     <ng-container matColumnDef="emailAddress">
         <mat-header-cell *matHeaderCellDef> EmailAddress </mat-header-cell>

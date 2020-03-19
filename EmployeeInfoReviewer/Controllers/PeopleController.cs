@@ -17,11 +17,11 @@ namespace EmployeeInfoReviewer.Controllers
         //MsSql
         public PeopleController(PeopleContext context, IConfiguration iconfig)
         {
-            // MsSql
-            _peopleService = new PeopleService(context);
+            //// MsSql
+            //_peopleService = new PeopleService(context);
 
-            //// MongoDB
-            //_peopleService = new MgPeopleService(iconfig);
+            // MongoDB
+            _peopleService = new MgPeopleService(iconfig);
 
         }
 

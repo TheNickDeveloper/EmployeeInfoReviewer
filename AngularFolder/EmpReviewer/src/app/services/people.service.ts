@@ -1,5 +1,5 @@
+import { Person } from './../models/person';
 import { Observable } from 'rxjs/internal/Observable';
-import { Person } from '../models/person';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -9,7 +9,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class PeopleService {
 
-  //public people: Person[];
   public baseUrl:string =environment.ApiBaseUrl;
   public httpOptions ={
     headers: new HttpHeaders({
@@ -21,14 +20,16 @@ export class PeopleService {
   constructor(private httpClient: HttpClient){
   }
 
-  getPeopleInfo(): Observable<any>{
+  getPeopleInfo(): Observable<Person[]>{
     let peopleRul = this.baseUrl + 'api/people';
-    return this.httpClient.get(peopleRul);
+    return this.httpClient.get<Person[]>(peopleRul);
   }
 
-  getPeopleInfoById(id : number ): Observable<any>{
+  getPeopleInfoById(id : number ): Observable<Person>{
     let peopleRul = this.baseUrl + 'api/people/' + id;
-    return this.httpClient.get(peopleRul);
+    console.log(id);
+    console.log(peopleRul);
+    return this.httpClient.get<Person>(peopleRul);
   }
 
   postPersonInfo(inputPerson: any){

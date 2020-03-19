@@ -10,10 +10,11 @@ import { PeopleService } from '../services/people.service';
 })
 export class PersonInfoComponent implements OnInit {
 
-  people : Person[];
+  people : Person[] = [];
+  newPeople : Person[];
   emailAddresses : EmailAddress[];
   addresses : Address[];
-  id: any;
+  id: number;
 
   peopleInfoColumns: any;
   addressColumns: any;
@@ -27,8 +28,10 @@ export class PersonInfoComponent implements OnInit {
     this.id = parseInt(this._route.snapshot.paramMap.get('id'));
 
     this._service.getPeopleInfoById(this.id).subscribe((data)=>{
-      this.people = data;
-
+      console.log(data);
+      this.people.push(data);
+      
+      this.newPeople = this.people;
       this.people.forEach(person => {
         this.addresses = person.addresses;
         this.emailAddresses = person.emailAddresses;
