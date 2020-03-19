@@ -23,14 +23,18 @@ namespace EmployeeInfoReviewer.Services
                 .Include(e => e.EmailAddresses);
         }
 
-        public IQueryable<Person> Get(int id)
+        public Person Get(int id)
         {
+            if (!PersonExists(id))
+            {
+                return null;
+            }
 
-            return (!PersonExists(id))
-                ? null
-                : _context.People
+            var person = _context.People
                     .Include(a => a.Addresses)
-                    .Include(e => e.EmailAddresses).Where(x => x.Id == id);
+                    .Include(e => e.EmailAddresses).Where(x => x.Id == id).ToList().FirstOrDefault();
+
+            return person;
         }
 
         public void Post(Person person)

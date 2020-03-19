@@ -8,7 +8,7 @@ namespace EmployeeInfoReviewer.Interfaces
     {
         bool Delete(int id);
         IEnumerable<Person> Get();
-        IQueryable<Person> Get(int id);
+        Person Get(int id);
         void Post(Person person);
         string Update(int id, Person person);
     }

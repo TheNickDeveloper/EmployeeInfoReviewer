@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { PeopleService } from '../services/people.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogSummitComponent } from '../dialog-summit/dialog-summit.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-info-input',
@@ -14,7 +16,9 @@ export class InfoInputComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _service: PeopleService) { }
+    private _service: PeopleService,
+    private _dialog: MatDialog,
+    private _router:Router) { }
 
   ngOnInit(): void {
 
@@ -67,6 +71,10 @@ export class InfoInputComponent implements OnInit {
     this._service.postPersonInfo(serializedFormData).subscribe(data => {
       console.log(data);
     });
-    ;
+
+    let result = this._dialog.open(DialogSummitComponent);
+    result.afterClosed().subscribe(r =>{
+      this._router.navigate(['/people']);
+    });
   }
 }

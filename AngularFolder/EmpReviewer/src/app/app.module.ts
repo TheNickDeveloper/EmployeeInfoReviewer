@@ -19,8 +19,11 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule} from '@angular/material/toolbar';
+import { MatDialogModule} from '@angular/material/dialog';
+
 
 import { InfoInputComponent } from './info-input/info-input.component';
+import { DialogSummitComponent } from './dialog-summit/dialog-summit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { InfoInputComponent } from './info-input/info-input.component';
     PeopleInfoComponent,
     PersonInfoComponent,
     InfoInputComponent,
+    DialogSummitComponent,
   ],
+  entryComponents:[DialogSummitComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,7 +47,8 @@ import { InfoInputComponent } from './info-input/info-input.component';
     MatChipsModule,
     MatFormFieldModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule
   ],
 
   // dependency inject

@@ -30,12 +30,10 @@ namespace EmployeeInfoReviewer.Services
             return _context.People.Find(x => true).ToList();
         }
 
-        public IQueryable<Person> Get(int id)
+        public Person Get(int id)
         {
             var person = Builders<Person>.Filter.Eq("Id", id);
-
-            return _context.People.Find(person).FirstOrDefault() as IQueryable<Person>;
-
+            return _context.People.Find(person).FirstOrDefault();
         }
 
         public void Post(Person person)

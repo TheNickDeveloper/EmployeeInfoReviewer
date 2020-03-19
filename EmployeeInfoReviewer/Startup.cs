@@ -32,8 +32,6 @@ namespace EmployeeInfoReviewer
             });
 
             var clientDomain = Configuration.GetValue<string>("ClientDomain");
-            //services.AddCors(cfg => cfg.AddPolicy("ClientDomain", builder => builder.WithOrigins(clientDomain)));
-
 
             services.AddCors(options =>
             {
@@ -45,8 +43,6 @@ namespace EmployeeInfoReviewer
                                         .AllowAnyMethod();
                 });
             });
-
-
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
