@@ -17,7 +17,19 @@
     </ng-container>
     <ng-container matColumnDef="detail">
         <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
-        <mat-cell *matCellDef="let person"> <a href="/people/{{person.id}}">link...</a> </mat-cell>
+        <mat-cell *matCellDef="let person">
+            <button mat-raised-button (click)="navigateToDetailPage(person.id)">
+                <mat-icon>description</mat-icon> Details
+            </button>
+        </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+        <mat-cell *matCellDef="let person">
+            <button mat-raised-button (click)="deletePerson(person.id)">
+                <mat-icon>delete</mat-icon> Delete
+            </button>
+        </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

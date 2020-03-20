@@ -33,9 +33,13 @@ export class PeopleService {
   }
 
   postPersonInfo(inputPerson: any){
-
     console.log(inputPerson);
     let peopleRul = this.baseUrl + 'api/people';
-    return this.httpClient.post(peopleRul,inputPerson, this.httpOptions);
+    return this.httpClient.post(peopleRul, inputPerson, this.httpOptions);
+  }
+
+  deletePersonInfo(id: number):Observable<void>{
+    let peopleRul = this.baseUrl + 'api/people/' + id;
+    return this.httpClient.delete<void>(peopleRul);
   }
 }

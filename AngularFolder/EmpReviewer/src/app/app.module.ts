@@ -20,7 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatDialogModule} from '@angular/material/dialog';
-
+import { MatIconModule} from '@angular/material/icon';
 
 import { InfoInputComponent } from './info-input/info-input.component';
 import { DialogSummitComponent } from './dialog-summit/dialog-summit.component';
@@ -33,7 +33,9 @@ import { DialogSummitComponent } from './dialog-summit/dialog-summit.component';
     InfoInputComponent,
     DialogSummitComponent,
   ],
-  entryComponents:[DialogSummitComponent],
+  entryComponents:[
+    DialogSummitComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -48,7 +50,8 @@ import { DialogSummitComponent } from './dialog-summit/dialog-summit.component';
     MatFormFieldModule,
     MatTableModule,
     MatToolbarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
 
   // dependency inject
