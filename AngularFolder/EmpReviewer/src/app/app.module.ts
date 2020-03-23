@@ -24,6 +24,7 @@ import { MatIconModule} from '@angular/material/icon';
 
 import { InfoInputComponent } from './info-input/info-input.component';
 import { DialogSummitComponent } from './dialog-summit/dialog-summit.component';
+import { DialogDeleteComponent } from './dialog-delete/dialog-delete.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,11 @@ import { DialogSummitComponent } from './dialog-summit/dialog-summit.component';
     PersonInfoComponent,
     InfoInputComponent,
     DialogSummitComponent,
+    DialogDeleteComponent,
   ],
   entryComponents:[
-    DialogSummitComponent
+    DialogSummitComponent,
+    DialogDeleteComponent
   ],
   imports: [
     BrowserModule,
