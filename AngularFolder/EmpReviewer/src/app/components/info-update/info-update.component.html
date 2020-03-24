@@ -1,25 +1,22 @@
-
-<div class="input-container">
+<div class="update-container">
     <form [formGroup]="myForm">
-        Value:{{myForm.value | json}}
-    
-        <hr>
-    
+
         <h4>Person Information</h4>
         <mat-form-field>
-            <input matInput placeholder="Fisrt Name*" formControlName="firstName">
+            <input matInput placeholder="Fisrt Name*" formControlName="firstName" >
             <mat-error> Required </mat-error>
         </mat-form-field>
     
         <mat-form-field>
-            <input matInput placeholder="Last Name*" formControlName="lastName">
+            <input matInput placeholder="Last Name*" formControlName="lastName" >
             <mat-error> Required </mat-error>
         </mat-form-field>
     
         <mat-form-field>
             <input type="number" matInput placeholder="Age" formControlName="age">
         </mat-form-field>
-    
+
+
         <h4>Addresses</h4>
         <div formArrayName="addresses">
             <div *ngFor="let address of addressForms.controls; let i=index" [formGroupName]="i">
@@ -40,11 +37,11 @@
                 <button mat-raised-button (click)="deleteAddress(i)">Delete</button>
             </div>
         </div>
-    
+
         <button mat-raised-button (click)="addAddress()">Add</button>
-    
+
         <p></p>
-    
+
         <h4>Email Addresses</h4>
         <div formArrayName="emailAddresses">
             <div *ngFor="let emailress of emailForms.controls; let i=index" [formGroupName]="i">
@@ -61,10 +58,10 @@
         <button mat-raised-button (click)="addEmailAddress()">Add</button>
         
         <p></p>
-    
-        <div>
-            <button mat-raised-button [disabled]="myForm.invalid" (click)="postDataToDb()">Summit</button>
-        </div>
-    </form>
 
+        <div>
+            <button mat-raised-button [disabled]="myForm.invalid" (click)="putDataToDb()">Summit</button>
+        </div>
+    
+    </form>
 </div>

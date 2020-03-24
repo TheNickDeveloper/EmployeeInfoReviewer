@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { PeopleService } from '../services/people.service';
+import { PeopleService } from '../../services/people.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogSummitComponent } from '../dialog-summit/dialog-summit.component';
+import { DialogSummitComponent } from '../../Dialogs/dialog-summit/dialog-summit.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -54,6 +54,7 @@ export class InfoInputComponent implements OnInit {
   get emailForms(){
     return this.myForm.get('emailAddresses') as FormArray;
   }
+  
   addEmailAddress(){
     const emailAddress = this.fb.group({
       emailAddress: ['',Validators.email]

@@ -1,0 +1,57 @@
+<P></P>
+
+<div fxLayout fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%">
+      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+</div>
+
+<div>
+    <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+            <mat-cell *matCellDef="let person"> {{person.id}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> FirstName </mat-header-cell>
+            <mat-cell *matCellDef="let person"> {{person.firstName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> LastName </mat-header-cell>
+            <mat-cell *matCellDef="let person"> {{person.lastName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="age">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Age </mat-header-cell>
+            <mat-cell *matCellDef="let person"> {{person.age}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="detail">
+            <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
+            <mat-cell *matCellDef="let person">
+                <button mat-raised-button (click)="navigateToDetailPage(person.id)">
+                    <mat-icon style="-webkit-text-fill-color:blue">link</mat-icon> Details
+                </button>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <mat-header-cell *matHeaderCellDef> Update </mat-header-cell>
+            <mat-cell *matCellDef="let person">
+                <button mat-raised-button (click)="navigateToPersonUpdatePage(person.id)">
+                    <mat-icon style="-webkit-text-fill-color:green">system_update_alt</mat-icon> Update
+                </button>
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+            <mat-cell *matCellDef="let person">
+                <button mat-raised-button (click)="deletePerson(person.id)">
+                    <mat-icon style="-webkit-text-fill-color:red">delete</mat-icon> Delete
+                </button>
+            </mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+</div>

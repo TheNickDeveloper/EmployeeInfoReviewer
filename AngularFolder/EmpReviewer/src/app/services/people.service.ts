@@ -38,6 +38,12 @@ export class PeopleService {
     return this.httpClient.post(peopleRul, inputPerson, this.httpOptions);
   }
 
+  putPersonInfo(id: number, inputPerson: any){
+    console.log(inputPerson);
+    let peopleRul = this.baseUrl + 'api/people/'+ id;
+    return this.httpClient.put(peopleRul, inputPerson, this.httpOptions);
+  }
+
   deletePersonInfo(id: number):Observable<void>{
     let peopleRul = this.baseUrl + 'api/people/' + id;
     return this.httpClient.delete<void>(peopleRul);

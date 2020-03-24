@@ -1,9 +1,12 @@
-import { DialogDeleteComponent } from './../dialog-delete/dialog-delete.component';
+import { DialogDeleteComponent } from '../../Dialogs/dialog-delete/dialog-delete.component';
 import { Router } from '@angular/router';
-import { PeopleService } from '../services/people.service';
-import { Component, OnInit } from '@angular/core';
-import { Person } from '../models/person';
+import { PeopleService } from '../../services/people.service';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Person } from '../../models/person';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatPaginator} from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-people-info',
@@ -11,26 +14,40 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
   styleUrls: ['./people-info.component.css']
 })
 
-export class PeopleInfoComponent implements OnInit {
+export class PeopleInfoComponent implements OnInit, AfterViewInit {
 
   people : Person[];
   displayedColumns: any;
+  public dataSource = new MatTableDataSource<Person>();
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private _service: PeopleService,
     private _dialog: MatDialog,
     private _router: Router) { }
 
+
   ngOnInit() {
     this._service.getPeopleInfo().subscribe((data)=>{
       console.log(data);
-      this.people = data;
+      this.dataSource.data = data as Person[];
     });
-    this.displayedColumns = ['id','firstName','lastName','age','detail','delete'];
+    this.displayedColumns = ['id','firstName','lastName','age','detail','update','delete'];
+  }
+
+  ngAfterViewInit():void{
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   navigateToDetailPage(id:number){
     this._router.navigate(['/people/' + id]);
+  }
+
+  navigateToPersonUpdatePage(id:number){
+    this._router.navigate(['/updatePerson/' + id]);
   }
 
   deletePerson(id:number){
@@ -58,8 +75,12 @@ export class PeopleInfoComponent implements OnInit {
 
   fetchData() {
     this._service.getPeopleInfo().subscribe(data =>{
-      this.people = data;
+      this.dataSource.data = data as Person[];
     });
+  }
+
+  doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
 }

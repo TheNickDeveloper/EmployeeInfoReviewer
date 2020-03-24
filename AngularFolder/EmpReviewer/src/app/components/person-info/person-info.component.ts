@@ -1,7 +1,7 @@
-import { Person, EmailAddress, Address } from '../models/person';
+import { Person, EmailAddress, Address } from '../../models/person';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PeopleService } from '../services/people.service';
+import { PeopleService } from '../../services/people.service';
 
 @Component({
   selector: 'app-person-info',

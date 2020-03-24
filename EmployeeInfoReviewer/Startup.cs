@@ -40,7 +40,8 @@ namespace EmployeeInfoReviewer
                 {
                     builder.WithOrigins(clientDomain)
                                         .AllowAnyHeader()
-                                        .AllowAnyMethod();
+                                        .AllowAnyMethod()
+                                        .AllowAnyOrigin();
                 });
             });
 
