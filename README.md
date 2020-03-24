@@ -1,12 +1,17 @@
 # EmployeeInfoReviewer
 ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that use employee information as CURD practice. 
  
-## Farmework Apply
+## Technique Apply
+#### Web API
 1. Asp.net Core web API.
 2. Entity Framework Core.
 3. SqlServer local.
 4. MongoDB Driver.
 5. MongoDB local.
+
+#### Web Page
+1. Angular 8
+2. Angular material
 
 ## Data structure
     * Person
@@ -25,11 +30,10 @@ ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that 
             ==> EmailAddress
 
 ## Functions
-* Basic CRUD.(Create, Read, Update, and Delete)
+#### Backend
+* Basic CRUD(Create, Read, Update, and Delete) either via postman or provided web page.
 
-* Can choose either MS_SQL or MongoDB.
-
-* Also support child object updating funciton.
+* Can switch either MS_SQL or MongoDB as Database from back end.
 
 * When using MS_SQL, using the contracture below. In addition, need to specify the child object ID while doing put function.
 
@@ -48,9 +52,21 @@ ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that 
         _peopleService = new MgPeopleService(iconfig);
     }
 ```
-        
-## How to Use
-1. Pull application to local.
-2. Make sure you have install SqlSever local for local db establish.
-3. Makue sure you have installed the MongoDB, then lanuch it.
-4. Lanuch application, and following the provide URL for doing CRUD.
+
+#### Frontend
+##### People Info View Page
+* View all people infomation in linked DB.
+* Could view details by clicking target's detail button on the page.
+* Could delete or update as well by clicking corresponding button on the page.
+* Could do key word search by entering key word in Filter seach bar.
+* Could do sorting by click the column name from the table.
+
+![image](https://github.com/TheNickDeveloper/EmployeeInfoReviewer/blob/master/images/PeopleInfoView.png)
+
+
+##### Add Person View Page
+* Could add new person into the DB by filling the following page after clicking AddPerson tab.
+* Basic validation for Name as required, and email need to follow email format.
+
+![image](https://github.com/TheNickDeveloper/EmployeeInfoReviewer/blob/master/images/AddPersonView.png)
+
