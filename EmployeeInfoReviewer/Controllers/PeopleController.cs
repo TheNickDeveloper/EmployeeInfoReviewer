@@ -5,6 +5,7 @@ using EmployeeInfoReviewer.Services;
 using EmployeeInfoReviewer.Interfaces;
 using Microsoft.Extensions.Configuration;
 using EmployeeDataAccessLibrary.DataAccess;
+using System.Threading.Tasks;
 
 namespace EmployeeInfoReviewer.Controllers
 {
@@ -27,21 +28,23 @@ namespace EmployeeInfoReviewer.Controllers
 
         // GET: api/People
         [HttpGet]
-        public IEnumerable<Person> GetPeople()
+        public async Task<IEnumerable<Person>> GetPeople()
         {
-            return _peopleService.Get();
+            var task = Task.Run(() => _peopleService.Get());
+            return await task;
         }
 
         // GET: api/People/5
         [HttpGet("{id}")]
-        public IActionResult GetPerson([FromRoute] int id)
+        public async Task<IActionResult> GetPerson([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var person = _peopleService.Get(id);
+            var task = Task.Run(() => _peopleService.Get(id));
+            var person = await task;
 
             if (person == null)
             {
@@ -53,7 +56,7 @@ namespace EmployeeInfoReviewer.Controllers
 
         // PUT: api/People/5
         [HttpPut("{id}")]
-        public IActionResult PutPerson([FromRoute] int id, [FromBody] Person person)
+        public async Task<IActionResult> PutPerson([FromRoute] int id, [FromBody] Person person)
         {
             if (!ModelState.IsValid)
             {
@@ -65,7 +68,8 @@ namespace EmployeeInfoReviewer.Controllers
                 return BadRequest();
             }
 
-            var executeResult = _peopleService.Update(id, person);
+            var task = Task.Run(() => _peopleService.Update(id, person));
+            var executeResult = await task;
 
             switch (executeResult)
             {
@@ -80,28 +84,30 @@ namespace EmployeeInfoReviewer.Controllers
 
         // POST: api/People
         [HttpPost]
-        public IActionResult PostPerson([FromBody] Person person)
+        public async Task<IActionResult> PostPerson([FromBody] Person person)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _peopleService.Post(person);
+            var task = Task.Run(() => _peopleService.Post(person));
+            await task;
 
             return CreatedAtAction("GetPerson", new { id = person.Id }, person);
         }
 
         // DELETE: api/People/5
         [HttpDelete("{id}")]
-        public IActionResult DeletePerson([FromRoute] int id)
+        public async Task<IActionResult> DeletePerson([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var executeResult = _peopleService.Delete(id);
+            var task = Task.Run(() => _peopleService.Delete(id));
+            var executeResult = await task;
 
             if (!executeResult)
             {

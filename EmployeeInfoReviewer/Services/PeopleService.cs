@@ -110,21 +110,15 @@ namespace EmployeeInfoReviewer.Services
                     .Where(a => a.Id == inputAddress.Id)
                     .FirstOrDefault();
 
-                if (originalAddress != null)
+                var newAddress = new Address
                 {
-                    _context.Entry(originalAddress).CurrentValues.SetValues(inputAddress);
-                }
-                else
-                {
-                    var newAddress = new Address
-                    {
-                        StreetAddress = inputAddress.StreetAddress,
-                        City = inputAddress.City,
-                        State = inputAddress.State,
-                        ZipCode = inputAddress.ZipCode
-                    };
-                    oringalAddresses.Add(newAddress);
-                }
+                    StreetAddress = inputAddress.StreetAddress,
+                    City = inputAddress.City,
+                    State = inputAddress.State,
+                    ZipCode = inputAddress.ZipCode
+                };
+
+                oringalAddresses.Add(newAddress);
             }
         }
 
@@ -136,18 +130,12 @@ namespace EmployeeInfoReviewer.Services
                     .Where(a => a.Id == inputEmail.Id)
                     .FirstOrDefault();
 
-                if (originalEmail != null)
+                var newEmail = new Email
                 {
-                    _context.Entry(originalEmail).CurrentValues.SetValues(inputEmail);
-                }
-                else
-                {
-                    var newEmail = new Email
-                    {
-                        EmailAddress = inputEmail.EmailAddress
-                    };
-                    originalEmailAddresses.Add(newEmail);
-                }
+                    EmailAddress = inputEmail.EmailAddress
+                };
+
+                originalEmailAddresses.Add(newEmail);
             }
         }
 
