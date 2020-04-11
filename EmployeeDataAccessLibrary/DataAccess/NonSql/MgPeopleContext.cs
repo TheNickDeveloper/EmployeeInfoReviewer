@@ -2,7 +2,7 @@
 using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
 
-namespace EmployeeDataAccessLibrary.DataAccess
+namespace EmployeeDataAccessLibrary.DataAccess.NonSql
 {
     public class MgPeopleContext
     {

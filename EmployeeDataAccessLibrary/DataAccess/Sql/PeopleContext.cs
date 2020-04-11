@@ -1,9 +1,9 @@
 ﻿using EmployeeDataAccessLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeDataAccessLibrary.DataAccess
+namespace EmployeeDataAccessLibrary.DataAccess.Sql
 {
-    public class PeopleContext : DbContext
+    public class PeopleContext : DbContext, IPeopleContext
     {
         public PeopleContext(DbContextOptions options) : base(options) {}
 

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeInfoReviewer", "EmployeeInfoReviewer\EmployeeInfoReviewer.csproj", "{5C646AA1-2E9C-4358-98FB-E4BD03B5B6E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeInfoReviewer", "EmployeeInfoReviewer\EmployeeInfoReviewer.csproj", "{5C646AA1-2E9C-4358-98FB-E4BD03B5B6E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeDataAccessLibrary", "EmployeeDataAccessLibrary\EmployeeDataAccessLibrary.csproj", "{1621CE51-3CA6-422D-AFA5-6B00D2FAEB81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeDataAccessLibrary", "EmployeeDataAccessLibrary\EmployeeDataAccessLibrary.csproj", "{1621CE51-3CA6-422D-AFA5-6B00D2FAEB81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeinfoReviewer.Tests", "EmployeeinfoReviewer.Tests\EmployeeinfoReviewer.Tests.csproj", "{F4298A63-864A-48CA-8B0E-6E08C1230E3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1621CE51-3CA6-422D-AFA5-6B00D2FAEB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1621CE51-3CA6-422D-AFA5-6B00D2FAEB81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1621CE51-3CA6-422D-AFA5-6B00D2FAEB81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4298A63-864A-48CA-8B0E-6E08C1230E3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4298A63-864A-48CA-8B0E-6E08C1230E3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4298A63-864A-48CA-8B0E-6E08C1230E3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4298A63-864A-48CA-8B0E-6E08C1230E3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

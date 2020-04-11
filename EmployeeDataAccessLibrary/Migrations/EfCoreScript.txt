@@ -1,7 +1,18 @@
 ﻿// Ef core update script
 
 *Add migration
-Add-Migration UpdateTest
+
+1. if there is one dbcontext
+	Add-Migration UpdateTest
+
+2. if there is more than one dbcontext, then need to sepcify the db
+	Add-Migration InitialCreate -Context SqlitePeopleContext -OutputDir Migrations\SqliteMigrations
+	Add-Migration InitialCreate -Context PeopleContext -OutputDir Migrations\SqlServerMigrations
 
 *Update database
-Update-Database
+
+1. if there is one dbcontext
+	Update-Database
+2. if there is more than one dbcontext, then need to sepcify the db
+	Update-Database -Context SqlitePeopleContext
+	Update-Database -Context PeopleContext

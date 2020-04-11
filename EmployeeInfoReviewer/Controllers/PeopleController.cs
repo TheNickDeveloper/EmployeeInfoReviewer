@@ -6,6 +6,8 @@ using EmployeeInfoReviewer.Interfaces;
 using Microsoft.Extensions.Configuration;
 using EmployeeDataAccessLibrary.DataAccess;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using EmployeeDataAccessLibrary.DataAccess.Sql;
 
 namespace EmployeeInfoReviewer.Controllers
 {
@@ -15,16 +17,23 @@ namespace EmployeeInfoReviewer.Controllers
     {
         private readonly IPeopleService _peopleService;
 
-        //MsSql
-        public PeopleController(PeopleContext context, IConfiguration iconfig)
+        //SqlServer
+        public PeopleController(SqlServerPeopleContext context)
         {
-            //// MsSql
-            //_peopleService = new PeopleService(context);
-
-            // MongoDB
-            _peopleService = new MgPeopleService(iconfig);
-
+            _peopleService = new PeopleService(context);
         }
+
+        ////Sqlite
+        //public PeopleController(SqlitePeopleContext context)
+        //{
+        //    _peopleService = new PeopleService(context);
+        //}
+
+        //// MongoDB
+        //public PeopleController(IConfiguration iconfig)
+        //{
+        //    _peopleService = new MgPeopleService(iconfig);
+        //}
 
         // GET: api/People
         [HttpGet]

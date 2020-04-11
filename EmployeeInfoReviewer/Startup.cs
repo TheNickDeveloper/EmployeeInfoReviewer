@@ -1,4 +1,5 @@
 using EmployeeDataAccessLibrary.DataAccess;
+using EmployeeDataAccessLibrary.DataAccess.Sql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -47,14 +48,20 @@ namespace EmployeeInfoReviewer
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            //MS_SQL use
-            services.AddDbContext<PeopleContext>(options =>
+            //SqlServer use
+            services.AddDbContext<SqlServerPeopleContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("Default"));
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
             });
 
-            //MongoDb use
-            services.AddSingleton<IConfiguration>(Configuration);
+            ////Sqlite use
+            //services.AddDbContext<SqlitePeopleContext>(options =>
+            //{
+            //    options.UseSqlite(Configuration.GetConnectionString("Sqlite"));
+            //});
+
+            ////MongoDb use
+            //services.AddSingleton<IConfiguration>(Configuration);
 
         }
 
