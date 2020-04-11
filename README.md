@@ -54,7 +54,7 @@ ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that 
     }
 ```
 
-* When using Sql-Server, using functions in Startup and PeopleController below.
+* When using Sqlite, using functions in Startup and PeopleController below.
 
 ```csharp
     // Startup.cs
