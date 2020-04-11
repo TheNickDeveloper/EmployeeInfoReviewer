@@ -6,8 +6,9 @@ ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that 
 1. Asp.net Core web API.
 2. Entity Framework Core.
 3. SqlServer local.
-4. MongoDB Driver.
-5. MongoDB local.
+4. Sqlite local.
+5. MongoDB Driver.
+6. MongoDB local.
 
 #### Web Page
 1. Angular 8
@@ -33,20 +34,49 @@ ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that 
 #### Backend
 * Basic CRUD(Create, Read, Update, and Delete) either via postman or provided web page.
 
-* Can switch either MS_SQL or MongoDB as Database from back end.
+* Can switch either Sql-Server, Sqlite, or MongoDB as Database from back end.
 
-* When using MS_SQL, using the contracture below. In addition, need to specify the child object ID while doing put function.
+* Dotnet core can intialize the DbContext by using dependency injection.
+
+* When using Sql-Server, using functions in Startup and PeopleController below.
 
 ```csharp
-    public PeopleController(PeopleContext context, IConfiguration iconfig)
+    // Startup.cs
+    services.AddDbContext<SqlServerPeopleContext>(options =>
+    {
+        options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
+    });
+    
+    // PeopleController.cs
+    public PeopleController(SqlServerPeopleContext context)
     {
         _peopleService = new PeopleService(context);
     }
 ```
 
-* When using MongoDB, using the contracture below. Child object ID will auto generate while doing put function.
+* When using Sql-Server, using functions in Startup and PeopleController below.
 
 ```csharp
+    // Startup.cs
+    services.AddDbContext<SqlitePeopleContext>(options =>
+    {
+        options.UseSqlite(Configuration.GetConnectionString("Sqlite"));
+    });
+    
+    // PeopleController.cs
+    public PeopleController(SqlitePeopleContext context)
+    {
+        _peopleService = new PeopleService(context);
+    }
+```
+
+* When using MongoDB, using functions in Startup and PeopleController below.
+
+```csharp
+    // Startup.cs
+    services.AddSingleton<IConfiguration>(Configuration);
+
+    // PeopleController.cs
     public PeopleController(PeopleContext context, IConfiguration iconfig)
     {
         _peopleService = new MgPeopleService(iconfig);

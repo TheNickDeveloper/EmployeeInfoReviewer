@@ -23,7 +23,7 @@ namespace EmployeeInfoReviewer.Controllers
             _peopleService = new PeopleService(context);
         }
 
-        ////Sqlite
+        //Sqlite
         //public PeopleController(SqlitePeopleContext context)
         //{
         //    _peopleService = new PeopleService(context);
