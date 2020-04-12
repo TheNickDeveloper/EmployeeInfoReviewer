@@ -9,7 +9,7 @@ ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that 
 4. Sqlite local.
 5. MongoDB Driver.
 6. MongoDB local.
-7. Serilog.Extensions.Logging.File for export log file.
+7. [Serilog.Extensions.Logging.File](https://github.com/serilog/serilog-extensions-logging-file) for export log file.
 
 #### Web Page
 1. Angular 8
