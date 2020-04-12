@@ -1,4 +1,3 @@
-using EmployeeDataAccessLibrary.DataAccess;
 using EmployeeDataAccessLibrary.DataAccess.Sql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

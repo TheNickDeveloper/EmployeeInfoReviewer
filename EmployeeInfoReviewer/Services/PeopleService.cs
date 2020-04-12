@@ -1,5 +1,4 @@
-﻿using EmployeeDataAccessLibrary.DataAccess;
-using EmployeeDataAccessLibrary.DataAccess.Sql;
+﻿using EmployeeDataAccessLibrary.DataAccess.Sql;
 using EmployeeDataAccessLibrary.Models;
 using EmployeeInfoReviewer.Interfaces;
 using Microsoft.EntityFrameworkCore;
