@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeDataAccessLibrary.DataAccess.Sql
 {
-    public class PeopleContext : DbContext, IPeopleContext
+    public class PeopleContext : DbContext
     {
-        public PeopleContext(DbContextOptions options) : base(options) {}
+        public PeopleContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Person> People { get; set; }
         public DbSet<Email> EmailsAddresses { get; set; }

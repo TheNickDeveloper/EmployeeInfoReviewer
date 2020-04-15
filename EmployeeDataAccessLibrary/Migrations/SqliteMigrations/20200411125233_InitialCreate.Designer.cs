@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EmployeeDataAccessLibrary.Migrations.SqliteMigrations
 {
-    [DbContext(typeof(SqlitePeopleContext))]
+    [DbContext(typeof(PeopleContext))]
     [Migration("20200411125233_InitialCreate")]
     partial class InitialCreate
     {

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using EmployeeDataAccessLibrary.Models;
-using EmployeeInfoReviewer.Services;
 using EmployeeInfoReviewer.Interfaces;
 using System.Threading.Tasks;
-using EmployeeDataAccessLibrary.DataAccess.Sql;
 using Microsoft.Extensions.Logging;
 using System;
+using EmployeeInfoReviewer.Services.LogControllers;
 
 namespace EmployeeInfoReviewer.Controllers
 {
@@ -16,32 +15,16 @@ namespace EmployeeInfoReviewer.Controllers
     {
         private readonly IPeopleService _peopleService;
         private readonly ILogger<PeopleController> _logger;
-        private readonly LogHelper _logHelper = new LogHelper("PeopleControllerClass");
+        private readonly ILogHelper _logHelper;
 
-
-        //SqlServer
-        public PeopleController(SqlServerPeopleContext context, ILogger<PeopleController> logger)
+        public PeopleController(IPeopleService peopleService, ILogger<PeopleController> logger, ILogHelper logHelper)
         {
-            _peopleService = new PeopleService(context);
+            _peopleService = peopleService;
             _logger = logger;
-            _logger.LogInformation(_logHelper.GetConnectionDb("SqlServer"));
+            _logHelper = logHelper;
+            _logHelper.ClassName = "PeopleController";
+            _logHelper.ActionTaskNameHandler = new PeopleControllerLogActionNameHandler();
         }
-
-        ////Sqlite
-        //public PeopleController(SqlitePeopleContext context, ILogger<PeopleController> logger)
-        //{
-        //    _peopleService = new PeopleService(context);
-        //    _logger = logger;
-        //    _logger.LogInformation(_logHelper.GetConnectionDb("Sqlite"));
-        //}
-
-        //// MongoDB
-        //public PeopleController(IConfiguration iconfig, ILogger<PeopleController> logger)
-        //{
-        //    _peopleService = new MgPeopleService(iconfig);
-        //    _logger = logger;
-        //    _logger.LogInformation(_logHelper.GetConnectionDb("MongoDb"));
-        //}
 
         // GET: api/People
         [HttpGet]

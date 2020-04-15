@@ -10,6 +10,7 @@ ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that 
 5. MongoDB Driver.
 6. MongoDB local.
 7. [Serilog.Extensions.Logging.File](https://github.com/serilog/serilog-extensions-logging-file) for export log file.
+8. [Autofac](https://github.com/autofac/Autofac) as DI framework
 
 #### Web Page
 1. Angular 8
@@ -35,52 +36,22 @@ ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that 
 #### Backend
 * Basic CRUD(Create, Read, Update, and Delete) either via postman or provided web page.
 
-* Can switch either Sql-Server, Sqlite, or MongoDB as Database from back end.
+* Can switch Sql-Server, Sqlite, or MongoDB as Db from back end by power of Autofac.
 
-* Dotnet core can intialize the DbContext by using dependency injection.
-
-* When using Sql-Server, using functions in Startup and PeopleController below.
+* Db can be switched by change the TargetDbName in constructure of Startup.cs.
 
 ```csharp
-    // Startup.cs
-    services.AddDbContext<SqlServerPeopleContext>(options =>
+    public enum DbOptions
     {
-        options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
-    });
-    
-    // PeopleController.cs
-    public PeopleController(SqlServerPeopleContext context)
-    {
-        _peopleService = new PeopleService(context);
+        SqlServer,
+        Sqlite,
+        MongoDb
     }
-```
 
-* When using Sqlite, using functions in Startup and PeopleController below.
-
-```csharp
-    // Startup.cs
-    services.AddDbContext<SqlitePeopleContext>(options =>
+    public Startup(IConfiguration configuration)
     {
-        options.UseSqlite(Configuration.GetConnectionString("Sqlite"));
-    });
-    
-    // PeopleController.cs
-    public PeopleController(SqlitePeopleContext context)
-    {
-        _peopleService = new PeopleService(context);
-    }
-```
-
-* When using MongoDB, using functions in Startup and PeopleController below.
-
-```csharp
-    // Startup.cs
-    services.AddSingleton<IConfiguration>(Configuration);
-
-    // PeopleController.cs
-    public PeopleController(PeopleContext context, IConfiguration iconfig)
-    {
-        _peopleService = new MgPeopleService(iconfig);
+        Configuration = configuration;
+        TargetDbName = DbOptions.SqlServer;
     }
 ```
 
