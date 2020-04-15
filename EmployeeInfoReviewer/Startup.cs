@@ -14,6 +14,8 @@ using System;
 
 namespace EmployeeInfoReviewer
 {
+    public enum DbOptions
+    {
         SqlServer,
         Sqlite,
         MongoDb
