@@ -353,3 +353,4 @@ MigrationBackup/
 .ionide/
 /AngularFolder/EmpReviewer/package-lock.json
 /AngularFolder/EmpReviewer/.vscode
+/EmployeeInfoReviewer/*.db

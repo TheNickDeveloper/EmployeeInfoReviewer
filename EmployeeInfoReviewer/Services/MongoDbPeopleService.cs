@@ -1,6 +1,8 @@
-﻿using EmployeeDataAccessLibrary.DataAccess.NonSql;
+﻿using AutoMapper;
+using EmployeeDataAccessLibrary.DataAccess.NonSql;
 using EmployeeDataAccessLibrary.Models;
 using EmployeeInfoReviewer.Interfaces;
+using EmployeeInfoReviewer.Models;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -8,13 +10,15 @@ using System.Linq;
 
 namespace EmployeeInfoReviewer.Services
 {
-    public class MgPeopleService : IPeopleService
+    public class MongoDbPeopleService : IPeopleService
     {
-        private readonly MgPeopleContext _context;
+        private readonly MongoDbPeopleContext _context;
+        private readonly IMapper _mapper;
 
-        public MgPeopleService(IConfiguration config)
+        public MongoDbPeopleService(IConfiguration config, IMapper mapper)
         {
-            _context = new MgPeopleContext(config);
+            _context = new MongoDbPeopleContext(config);
+            _mapper = mapper;
         }
 
         public bool Delete(int id)
@@ -25,18 +29,21 @@ namespace EmployeeInfoReviewer.Services
             return true;
         }
 
-        public IEnumerable<Person> Get()
+        public IEnumerable<ReviewerPerson> Get()
         {
-            return _context.People.Find(x => true).ToList();
+            var sourcePeopleInfo = _context.People.Find(x => true).ToList();
+            return _mapper.Map<List<ReviewerPerson>>(sourcePeopleInfo);
         }
 
-        public Person Get(int id)
+        public ReviewerPerson Get(int id)
         {
             var person = Builders<Person>.Filter.Eq("Id", id);
-            return _context.People.Find(person).FirstOrDefault();
+            var targetPerson = _context.People.Find(person).FirstOrDefault();
+
+            return _mapper.Map<ReviewerPerson>(targetPerson);
         }
 
-        public void Post(Person person)
+        public void Post(ReviewerPerson person)
         {
           
             if (_context.People.Find(x => true).Any())
@@ -50,23 +57,25 @@ namespace EmployeeInfoReviewer.Services
             }
 
             person = UpdateInputInfo(person);
+            var convertedPerson = _mapper.Map<Person>(person);
 
-            _context.People.InsertOne(person);
+            _context.People.InsertOne(convertedPerson);
         }
 
-        public string Update(int id, Person person)
+        public string Update(int id, ReviewerPerson person)
         {
             if (_context.People.Find(x=>x.Id == id).Any())
             {
                 person = UpdateInputInfo(person);
-                _context.People.ReplaceOne(x => x.Id == id, person);
+                var convertedPerson = _mapper.Map<Person>(person);
+                _context.People.ReplaceOne(x => x.Id == id, convertedPerson);
                 return "Success";
             }
 
             return "NotFound";
         }
 
-        private Person UpdateInputInfo(Person person)
+        private ReviewerPerson UpdateInputInfo(ReviewerPerson person)
         {
             for (int i = 0; i < person.EmailAddresses.Count; i++)
             {

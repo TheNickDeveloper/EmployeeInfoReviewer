@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System;
 using EmployeeInfoReviewer.Services.LogControllers;
+using EmployeeInfoReviewer.Models;
 
 namespace EmployeeInfoReviewer.Controllers
 {
@@ -28,7 +29,7 @@ namespace EmployeeInfoReviewer.Controllers
 
         // GET: api/People
         [HttpGet]
-        public async Task<IEnumerable<Person>> GetPeople()
+        public async Task<IEnumerable<ReviewerPerson>> GetPeople()
         {
             _logger.LogInformation(_logHelper.GetTaskActionName("GetPeople"));
 
@@ -67,7 +68,7 @@ namespace EmployeeInfoReviewer.Controllers
 
         // PUT: api/People/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson([FromRoute] int id, [FromBody] Person person)
+        public async Task<IActionResult> PutPerson([FromRoute] int id, [FromBody] ReviewerPerson person)
         {
             var updatePersonId = id.ToString();
             _logger.LogInformation(_logHelper.GetTaskActionName("PutPerson", updatePersonId));
@@ -103,7 +104,7 @@ namespace EmployeeInfoReviewer.Controllers
 
         // POST: api/People
         [HttpPost]
-        public async Task<IActionResult> PostPerson([FromBody] Person person)
+        public async Task<IActionResult> PostPerson([FromBody] ReviewerPerson person)
         {
             _logger.LogInformation(_logHelper.GetTaskActionName("PostPerson"));
 

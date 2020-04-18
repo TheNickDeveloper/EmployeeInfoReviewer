@@ -4,12 +4,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace EmployeeDataAccessLibrary.DataAccess.NonSql
 {
-    public class MgPeopleContext
+    public class MongoDbPeopleContext
     {
         private readonly IMongoDatabase _db = null;
         private readonly IConfiguration config;
 
-        public MgPeopleContext(IConfiguration iconfig)
+        public MongoDbPeopleContext(IConfiguration iconfig)
         {
             config = iconfig;
             var client = new MongoClient(config.GetSection("MongoConnection").GetSection("ConnectionString").Value);

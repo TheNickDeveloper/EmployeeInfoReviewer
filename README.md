@@ -1,5 +1,5 @@
 # EmployeeInfoReviewer
-ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that use employee information as CURD practice. 
+ASP.NET Core API feat Angular8 by using SQL Server, Sqlite, or MongoDB. An web app that use employee information as CURD practice. 
  
 ## Technique Apply
 #### Web API
@@ -11,6 +11,7 @@ ASP.NET Core API feat Angular8 by using SQL Server and MongoDB. An web app that 
 6. MongoDB local.
 7. [Serilog.Extensions.Logging.File](https://github.com/serilog/serilog-extensions-logging-file) for export log file.
 8. [Autofac](https://github.com/autofac/Autofac) as DI framework
+9. [AutoMapper](https://github.com/AutoMapper/AutoMapper) for mapping across different objects.
 
 #### Web Page
 1. Angular 8

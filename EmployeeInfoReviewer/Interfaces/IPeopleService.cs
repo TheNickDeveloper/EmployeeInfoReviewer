@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using EmployeeDataAccessLibrary.Models;
+using EmployeeInfoReviewer.Models;
 
 namespace EmployeeInfoReviewer.Interfaces
 {
     public interface IPeopleService
     {
         bool Delete(int id);
-        IEnumerable<Person> Get();
-        Person Get(int id);
-        void Post(Person person);
-        string Update(int id, Person person);
+        IEnumerable<ReviewerPerson> Get();
+        ReviewerPerson Get(int id);
+        void Post(ReviewerPerson person);
+        string Update(int id, ReviewerPerson person);
     }
 }

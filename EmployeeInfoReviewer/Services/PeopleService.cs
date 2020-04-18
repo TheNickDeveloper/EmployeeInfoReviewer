@@ -1,6 +1,8 @@
-﻿using EmployeeDataAccessLibrary.DataAccess.Sql;
+﻿using AutoMapper;
+using EmployeeDataAccessLibrary.DataAccess.Sql;
 using EmployeeDataAccessLibrary.Models;
 using EmployeeInfoReviewer.Interfaces;
+using EmployeeInfoReviewer.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +12,22 @@ namespace EmployeeInfoReviewer.Services
     public class PeopleService : IPeopleService
     {
         private readonly PeopleContext _context;
+        private readonly IMapper _mapper;
 
-        public PeopleService(PeopleContext context)
+
+        public PeopleService(PeopleContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public IEnumerable<Person> Get()
+        public IEnumerable<ReviewerPerson> Get()
         {
-            return _context.People
-                .Include(a => a.Addresses)
-                .Include(e => e.EmailAddresses);
+            var sourePeopleInfo = _context.People.Include(a => a.Addresses).Include(e => e.EmailAddresses);
+            return _mapper.Map<List<ReviewerPerson>>(sourePeopleInfo);
         }
 
-        public Person Get(int id)
+        public ReviewerPerson Get(int id)
         {
             if (!PersonExists(id))
             {
@@ -34,16 +38,17 @@ namespace EmployeeInfoReviewer.Services
                     .Include(a => a.Addresses)
                     .Include(e => e.EmailAddresses).Where(x => x.Id == id).ToList().FirstOrDefault();
 
-            return person;
+            return _mapper.Map<ReviewerPerson>(person);
         }
 
-        public void Post(Person person)
+        public void Post(ReviewerPerson person)
         {
-            _context.People.Add(person);
+            var convertedPerson = _mapper.Map<Person>(person);
+            _context.People.Add(convertedPerson);
             _context.SaveChanges();
         }
 
-        public string Update(int id, Person inputPerson)
+        public string Update(int id, ReviewerPerson inputPerson)
         {
             var originalPerson = _context.People
                 .Include(a => a.Addresses)
@@ -51,15 +56,16 @@ namespace EmployeeInfoReviewer.Services
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
 
+            var convertedInputPerson = _mapper.Map<Person>(inputPerson);
+
             if (originalPerson != null)
             {
-                _context.Entry(originalPerson).CurrentValues.SetValues(inputPerson);
+                _context.Entry(originalPerson).CurrentValues.SetValues(convertedInputPerson);
 
-
-                CleanAddressInDbContext(originalPerson, inputPerson);
-                CleanEmailAddressesInDbContext(originalPerson, inputPerson);
-                UpdateAddresseInDbContext(originalPerson.Addresses, inputPerson.Addresses);
-                UpdateEmailAddresseInDbContext(originalPerson.EmailAddresses, inputPerson.EmailAddresses);
+                CleanAddressInDbContext(originalPerson, convertedInputPerson);
+                CleanEmailAddressesInDbContext(originalPerson, convertedInputPerson);
+                UpdateAddresseInDbContext(originalPerson.Addresses, convertedInputPerson.Addresses);
+                UpdateEmailAddresseInDbContext(originalPerson.EmailAddresses, convertedInputPerson.EmailAddresses);
             }
 
             try

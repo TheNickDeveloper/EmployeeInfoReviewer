@@ -1,8 +1,10 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using EmployeeDataAccessLibrary.DataAccess.Sql;
 using EmployeeInfoReviewer.Interfaces;
 using EmployeeInfoReviewer.Services;
+using EmployeeInfoReviewer.Services.MappingProfiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -75,34 +77,40 @@ namespace EmployeeInfoReviewer
             #endregion
 
             #region Autofac DI
+
+            // auto mapper DI
+            var mapperConfig = new MapperConfiguration(mc => mc.AddProfile(new MappingProfile()));
+            IMapper mapper = mapperConfig.CreateMapper();
+
             var builder = new ContainerBuilder();
 
+            // dbContext DI
             switch (TargetDbName)
             {
                 case DbOptions.Sqlite:
-                    builder.Register(ctx =>
-                    {
-                        var optionBuilder = new DbContextOptionsBuilder<PeopleContext>();
-                        optionBuilder.UseSqlite(Configuration.GetConnectionString(Enum.GetName(typeof(DbOptions), TargetDbName)));
-                        PeopleContext p = new PeopleContext(optionBuilder.Options);
-                        return new PeopleService(p);
-                    }).As<IPeopleService>();
-                    break;
-
                 case DbOptions.SqlServer:
                     builder.Register(ctx =>
                     {
                         var optionBuilder = new DbContextOptionsBuilder<PeopleContext>();
-                        optionBuilder.UseSqlServer(Configuration.GetConnectionString(Enum.GetName(typeof(DbOptions), TargetDbName)));
-                        PeopleContext p = new PeopleContext(optionBuilder.Options);
-                        return new PeopleService(p);
+                        if (TargetDbName == DbOptions.Sqlite)
+                        {
+                            optionBuilder.UseSqlite(Configuration.GetConnectionString(Enum.GetName(typeof(DbOptions), TargetDbName)));
+                        }
+
+                        if (TargetDbName == DbOptions.SqlServer)
+                        {
+                            optionBuilder.UseSqlServer(Configuration.GetConnectionString(Enum.GetName(typeof(DbOptions), TargetDbName)));
+                        }
+
+                        var peopleContext = new PeopleContext(optionBuilder.Options);
+                        return new PeopleService(peopleContext, mapper);
                     }).As<IPeopleService>();
                     break;
 
                 case DbOptions.MongoDb:
                     builder.Register(ctx =>
                     {
-                        return new MgPeopleService(Configuration);
+                        return new MongoDbPeopleService(Configuration, mapper);
                     }).As<IPeopleService>();
                     break;
             }
