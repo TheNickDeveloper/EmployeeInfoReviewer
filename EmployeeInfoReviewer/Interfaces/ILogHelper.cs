@@ -2,13 +2,12 @@
 {
     public interface ILogHelper
     {
-        string ClassName { get; set; }
-        string DbName { get; set; }
-        IControllerLog ActionTaskNameHandler { get; set; }
-        string GetTaskActionName(string actionName, string id = null);
-        string ReturnBadRequestStatus();
-        string ReturnNoFoudStatus(string id);
-        string ReturnSuccessStatus();
-        string ReturnUncontrolException();
+        string _className { get; set; }
+        IControllerLog _actionTaskNameHandler { get; set; }
+        void GetTaskActionName(string actionName, string id = null);
+        void ReturnBadRequestStatus();
+        void ReturnNoFoudStatus(string id);
+        void ReturnSuccessStatus();
+        void ReturnUncontrolException(string exceptionDetails);
     }
 }

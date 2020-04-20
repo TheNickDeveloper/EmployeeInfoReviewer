@@ -3,7 +3,7 @@ using System;
 
 namespace EmployeeInfoReviewer.Services.LogControllers
 {
-    public class PeopleControllerLogActionNameHandler : IControllerLog
+    public class PeopleLogActionNameHandler : IControllerLog
     {
         public string ReturnTaskActionName(string className, string actionName, string id = null)
         {
@@ -17,7 +17,7 @@ namespace EmployeeInfoReviewer.Services.LogControllers
                     return $"{className}: Add new person info. [{DateTime.UtcNow}]";
                 case "GetPerson":
                     return $"{className}: Get person:{inputId} data. [{DateTime.UtcNow}]";
-                case "PutPerson":
+                case "UpdatePerson":
                     return $"{className}: Update person:{inputId} data. [{DateTime.UtcNow}]";
                 case "DeletePerson":
                     return $"{className}: Delete person:{inputId} data. [{DateTime.UtcNow}]";

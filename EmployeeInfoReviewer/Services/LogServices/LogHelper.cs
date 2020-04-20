@@ -1,39 +1,45 @@
 ﻿using EmployeeInfoReviewer.Interfaces;
+using Serilog;
 using System;
 
 namespace EmployeeInfoReviewer.Services
 {
-    public class LogHelper : ILogHelper
+    public class LogHelper
     {
-        public string ClassName { get; set; }
-        public string DbName { get; set; }
+        private readonly IControllerLog _actionTaskNameHandler;
+        private readonly string _className;
 
-        public IControllerLog ActionTaskNameHandler { get; set; }
+        public LogHelper(string className, IControllerLog actionTaskNameHandler)
+        {
+            _className = className;
+            _actionTaskNameHandler = actionTaskNameHandler;
+        }
 
-        public string GetTaskActionName(string actionName, string id = null)
+
+        public void GetTaskActionName(string actionName, string id = null)
         {
             var inputId = id ?? "NoId";
-            return ActionTaskNameHandler.ReturnTaskActionName(ClassName, actionName, inputId);
+            Log.Information(_actionTaskNameHandler.ReturnTaskActionName(_className, actionName, inputId));
         }
 
-        public string ReturnSuccessStatus()
+        public void ReturnSuccessStatus()
         {
-            return $"{ClassName}: Success. [{DateTime.UtcNow}]";
+            Log.Information($"{_className}: Success. [{DateTime.UtcNow}]");
         }
 
-        public string ReturnNoFoudStatus(string id)
+        public void ReturnNoFoudStatus(string id)
         {
-            return $"{ClassName}: Cannot find person:{id}. [{DateTime.UtcNow}]";
+            Log.Warning($"{_className}: Cannot find person:{id}. [{DateTime.UtcNow}]");
         }
 
-        public string ReturnBadRequestStatus()
+        public void ReturnBadRequestStatus()
         {
-            return $"{ClassName}: Bad request. [{DateTime.UtcNow}]";
+            Log.Warning($"{_className}: Bad request. [{DateTime.UtcNow}]");
         }
 
-        public string ReturnUncontrolException()
+        public void ReturnUncontrolException(string exceptionDetails)
         {
-            return $"{ClassName}: UnExpected situation. [{DateTime.UtcNow}]";
+            Log.Error($"{_className}: UnExpected situation. {exceptionDetails}. [{DateTime.UtcNow}]");
         }
 
     }

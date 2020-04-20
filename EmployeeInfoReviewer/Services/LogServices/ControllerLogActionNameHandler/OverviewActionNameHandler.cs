@@ -3,7 +3,7 @@ using System;
 
 namespace EmployeeInfoReviewer.Services.LogControllers
 {
-    public class OverviewControllerLogActionNameHandler : IControllerLog
+    public class OverviewActionNameHandler : IControllerLog
     {
         public string ReturnTaskActionName(string className, string actionName, string id = null)
         {

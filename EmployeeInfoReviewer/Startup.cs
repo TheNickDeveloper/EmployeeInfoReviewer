@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using System;
 
 namespace EmployeeInfoReviewer
@@ -48,6 +49,7 @@ namespace EmployeeInfoReviewer
 
             var clientDomain = Configuration.GetValue<string>("ClientDomain");
 
+            // enable to build the connection from local db for http request
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -61,6 +63,8 @@ namespace EmployeeInfoReviewer
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            InitializeLogger();
 
             #region DotNet self DI
             //services.AddDbContext<PeopleContext>(options =>
@@ -83,7 +87,26 @@ namespace EmployeeInfoReviewer
             IMapper mapper = mapperConfig.CreateMapper();
 
             var builder = new ContainerBuilder();
+            InJectDbContext(builder, mapper);
+            builder.Populate(services);
 
+            var container = builder.Build();
+            return new AutofacServiceProvider(container);
+            #endregion
+        }
+        private void InitializeLogger()
+        {
+            // Build Logger
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.Console()
+                .WriteTo.File(Configuration.GetSection("Logging").GetValue<string>("Path")
+                    + $"EmployeeInfoReviewer-{DateTime.UtcNow.Date.ToString("yyyyMMdd")}.txt")
+                .CreateLogger();
+        }
+
+        private void InJectDbContext(ContainerBuilder builder, IMapper mapper)
+        {
             // dbContext DI
             switch (TargetDbName)
             {
@@ -103,6 +126,7 @@ namespace EmployeeInfoReviewer
                         }
 
                         var peopleContext = new PeopleContext(optionBuilder.Options);
+
                         return new PeopleService(peopleContext, mapper);
                     }).As<IPeopleService>();
                     break;
@@ -115,12 +139,7 @@ namespace EmployeeInfoReviewer
                     break;
             }
 
-            builder.RegisterType<LogHelper>().As<ILogHelper>();
-            builder.Populate(services);
-
-            var container = builder.Build();
-            return new AutofacServiceProvider(container);
-            #endregion
+            Log.Information($"Startup: Use {Enum.GetName(typeof(DbOptions), TargetDbName)} as DB. [{DateTime.UtcNow}]");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
